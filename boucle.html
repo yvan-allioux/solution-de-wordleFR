@@ -11,13 +11,10 @@
 <body>
 <p>script de solution de wordleFR</p>
 <a href="https://wordle.louan.me/">wordleFR</a><br> <br>
-<a href="boucle.html">les 1000 prochain mot avec les date</a><br> <br>
-
-<input type="date" id="dateSelect">
-<button onclick="clicValideDate()">ok pour la date</button>
 
 <p>resulta :</p>
 <p id="resulta"></p>
+<ul id="myList"></ul>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.js"
@@ -26,9 +23,34 @@
 </script>
 
 <script>
-    function clicValideDate() {
+    var i = 0;
+    y = 2022;
+    m = 01;
+    d = 9;
+while(i != 1000){
+    
+    if(d < 31){
+    d++;
+    }else{
+    d = 0;
+    m++;
+    }
 
-        var input = document.getElementById("dateSelect").value;
+    if(m < 12){
+    }else{
+    m = 0;
+    y++;
+    }
+
+    dateBoucleVar = y + "-" + m + "-" + d;
+    clicValideDate(dateBoucleVar);
+    i++;
+}
+
+
+
+    function clicValideDate(input) {
+
         var d = new Date(input);
 
         year = d.getFullYear();
@@ -53,7 +75,11 @@
         var wordOfTheDay = exports['' + wordOfTheDayNUMB];
         console.log('wordOfTheDay: ', wordOfTheDay);
 
-        document.getElementById("resulta").innerHTML = wordOfTheDay;
+        var node = document.createElement("LI");                 // Create a <li> node
+        var textnode = document.createTextNode(input + " - " + wordOfTheDay);         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+        document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with
+
     }
 </script>
 
